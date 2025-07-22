@@ -4,7 +4,8 @@ const ADDRESSES = require('../helper/coreAssets.json');
 module.exports = {
   misrepresentedTokens: true,
   methodology:
-    "TVL includes scUSD, STS, wOS held in various contracts. Also includes wstkscUSD tokens in the vault, converted to scUSD via convertToAssets().",
+    "TVL includes scUSD, STS, wOS held in various contracts. Also includes wstkscUSD tokens in the vault, converted to scUSD via convertToAssets(). Also tracks artBTC on Goat chain.",
+  
   sonic: {
     tvl: async (api) => {
       const tokensAndOwners = [
@@ -17,11 +18,20 @@ module.exports = {
       return api.sumTokens({ tokensAndOwners });
     },
   },
+
   avax: {
     tvl: sumTokensExport({
       tokensAndOwners: [
         ['0xDf788AD40181894dA035B827cDF55C523bf52F67', '0xf010696e0BE614511516bE0DdB89AFf06B6cA440'], // rsAVAX
         ['0x06d47F3fb376649c3A9Dafe069B3D6E35572219E', '0xC37914DacF56418A385a4883512Be8b8279c94C5'], // savUSD
+      ],
+    }),
+  },
+
+  goat: {
+    tvl: sumTokensExport({
+      tokensAndOwners: [
+        ['0x02F294cC9Ceb2c80FbA3fD779e17FE191Cc360C4', '0xe968410DB52C44A031bECFCBd4f1a9180e329699'], // artBTC
       ],
     }),
   },
